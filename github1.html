@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mazda3 vs Impreza: Interactive Comparison Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+</head>
+<body>
+    <!-- Hero Section -->
+    <header class="hero-section">
+        <div class="hero-background"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Mazda3 vs Impreza</h1>
+                <h2 class="hero-subtitle">Interactive Comparison Dashboard</h2>
+                <p class="hero-description">Complete analysis for manual transmission enthusiasts under $15K</p>
+                
+                <div class="quick-stats">
+                    <div class="stat-card mazda3-stat">
+                        <div class="stat-number">8.0</div>
+                        <div class="stat-label">Mazda3 Score</div>
+                        <div class="stat-badge winner">Winner</div>
+                    </div>
+                    <div class="stat-card vs-stat">
+                        <div class="stat-icon">⚡</div>
+                        <div class="stat-label">Head-to-Head</div>
+                    </div>
+                    <div class="stat-card impreza-stat">
+                        <div class="stat-number">7.4</div>
+                        <div class="stat-label">Impreza Score</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Overview Cards Section -->
+    <section class="section overview-section">
+        <div class="container">
+            <h2 class="section-title">Vehicle Overview</h2>
+            <div class="overview-cards">
+                <div class="car-overview-card mazda3-card" data-car="mazda3">
+                    <div class="card-header">
+                        <h3 class="car-name">Mazda3 Manual</h3>
+                        <p class="car-subtitle">The Driver's Choice</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="key-specs">
+                            <div class="spec-row">
+                                <span>Model Years:</span>
+                                <span>2014-2019</span>
+                            </div>
+                            <div class="spec-row">
+                                <span>Engines:</span>
+                                <span>2.0L/2.5L SKYACTIV-G</span>
+                            </div>
+                            <div class="spec-row">
+                                <span>Transmission:</span>
+                                <span>6-speed manual</span>
+                            </div>
+                            <div class="spec-row">
+                                <span>Drivetrain:</span>
+                                <span>FWD</span>
+                            </div>
+                        </div>
+                        <div class="feature-badges">
+                            <span class="badge badge-primary">191 HP</span>
+                            <span class="badge badge-secondary">6-Speed MT</span>
+                            <span class="badge badge-success">4.0★ Rating</span>
+                        </div>
+                    </div>
+                    <div class="hover-details">
+                        <p><strong>Best for:</strong> Driving enthusiasts who prioritize engagement and reliability</p>
+                        <p><strong>Price Range:</strong> $8,000 - $14,500</p>
+                    </div>
+                </div>
+
+                <div class="car-overview-card impreza-card" data-car="impreza">
+                    <div class="card-header">
+                        <h3 class="car-name">Subaru Impreza Manual</h3>
+                        <p class="car-subtitle">The Practical All-Weather Choice</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="key-specs">
+                            <div class="spec-row">
+                                <span>Model Years:</span>
+                                <span>2012-2020</span>
+                            </div>
+                            <div class="spec-row">
+                                <span>Engine:</span>
+                                <span>2.0L BOXER</span>
+                            </div>
+                            <div class="spec-row">
+                                <span>Transmission:</span>
+                                <span>5-speed manual</span>
+                            </div>
+                            <div class="spec-row">
+                                <span>Drivetrain:</span>
+                                <span>AWD</span>
+                            </div>
+                        </div>
+                        <div class="feature-badges">
+                            <span class="badge badge-primary">152 HP</span>
+                            <span class="badge badge-secondary">Standard AWD</span>
+                            <span class="badge badge-warning">3.5★ Rating</span>
+                        </div>
+                    </div>
+                    <div class="hover-details">
+                        <p><strong>Best for:</strong> All-weather driving and maximum interior space</p>
+                        <p><strong>Price Range:</strong> $7,500 - $14,000</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Charts Section -->
+    <section class="section charts-section">
+        <div class="container">
+            <h2 class="section-title">Performance Analysis</h2>
+            
+            <!-- Performance Radar Chart -->
+            <div class="chart-grid">
+                <div class="chart-container-wrapper">
+                    <h3 class="chart-title">Performance Radar</h3>
+                    <div class="chart-container" style="position: relative; height: 400px;">
+                        <canvas id="performanceRadar"></canvas>
+                    </div>
+                </div>
+
+                <!-- Cost Analysis Chart -->
+                <div class="chart-container-wrapper">
+                    <h3 class="chart-title">Cost Analysis</h3>
+                    <div class="chart-container" style="position: relative; height: 400px;">
+                        <canvas id="costAnalysis"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Space & Fuel Charts -->
+            <div class="chart-grid">
+                <div class="chart-container-wrapper">
+                    <h3 class="chart-title">Interior Space Comparison</h3>
+                    <div class="chart-container" style="position: relative; height: 350px;">
+                        <canvas id="spaceComparison"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-container-wrapper">
+                    <h3 class="chart-title">Fuel Economy Gauges</h3>
+                    <div class="fuel-gauges">
+                        <div class="gauge-container">
+                            <h4>Mazda3 Combined MPG</h4>
+                            <div class="chart-container" style="position: relative; height: 200px;">
+                                <canvas id="mazda3FuelGauge"></canvas>
+                            </div>
+                        </div>
+                        <div class="gauge-container">
+                            <h4>Impreza Combined MPG</h4>
+                            <div class="chart-container" style="position: relative; height: 200px;">
+                                <canvas id="imprezaFuelGauge"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reliability Scorecard -->
+            <div class="reliability-scorecard">
+                <h3 class="chart-title">Reliability & Maintenance Scorecard</h3>
+                <div class="scorecard-grid">
+                    <div class="score-item mazda3-score">
+                        <div class="score-header">
+                            <h4>Mazda3</h4>
+                            <div class="rating-stars">
+                                <span class="star filled">★</span>
+                                <span class="star filled">★</span>
+                                <span class="star filled">★</span>
+                                <span class="star filled">★</span>
+                                <span class="star empty">★</span>
+                                <span class="rating-text">4.0/5.0</span>
+                            </div>
+                        </div>
+                        <div class="score-metrics">
+                            <div class="metric">
+                                <span class="metric-label">Annual Maintenance</span>
+                                <span class="metric-value">$433</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">5-Year Total</span>
+                                <span class="metric-value">$2,165</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Major Repair Risk</span>
+                                <span class="metric-value">10%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="score-item impreza-score">
+                        <div class="score-header">
+                            <h4>Impreza</h4>
+                            <div class="rating-stars">
+                                <span class="star filled">★</span>
+                                <span class="star filled">★</span>
+                                <span class="star filled">★</span>
+                                <span class="star half">★</span>
+                                <span class="star empty">★</span>
+                                <span class="rating-text">3.5/5.0</span>
+                            </div>
+                        </div>
+                        <div class="score-metrics">
+                            <div class="metric">
+                                <span class="metric-label">Annual Maintenance</span>
+                                <span class="metric-value">$653</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">5-Year Total</span>
+                                <span class="metric-value">$3,265</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Major Repair Risk</span>
+                                <span class="metric-value">18%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Comparison Tables -->
+    <section class="section comparison-tables">
+        <div class="container">
+            <h2 class="section-title">Detailed Specifications</h2>
+            
+            <div class="table-controls">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All Specs</button>
+                    <button class="filter-btn" data-filter="performance">Performance</button>
+                    <button class="filter-btn" data-filter="economics">Economics</button>
+                    <button class="filter-btn" data-filter="space">Space</button>
+                    <button class="filter-btn" data-filter="efficiency">Efficiency</button>
+                </div>
+                <div class="sort-controls">
+                    <select id="sortBy" class="form-control">
+                        <option value="metric">Sort by Metric</option>
+                        <option value="mazda3-advantage">Mazda3 Advantage</option>
+                        <option value="impreza-advantage">Impreza Advantage</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="comparison-table-wrapper">
+                <table class="comparison-table" id="specsTable">
+                    <thead>
+                        <tr>
+                            <th>Specification</th>
+                            <th class="mazda3-col">Mazda3</th>
+                            <th class="impreza-col">Impreza</th>
+                            <th>Winner</th>
+                        </tr>
+                    </thead>
+                    <tbody id="specsTableBody">
+                        <!-- Table content will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Pros & Cons -->
+    <section class="section pros-cons-section">
+        <div class="container">
+            <h2 class="section-title">Pros & Cons Analysis</h2>
+            
+            <div class="pros-cons-toggle">
+                <button class="toggle-btn active" data-car="mazda3">Mazda3</button>
+                <button class="toggle-btn" data-car="impreza">Impreza</button>
+                <button class="toggle-btn" data-car="both">Side by Side</button>
+            </div>
+
+            <div class="pros-cons-content">
+                <div class="car-pros-cons mazda3-pros-cons active">
+                    <div class="pros-section">
+                        <h3>Mazda3 Advantages</h3>
+                        <div class="pros-list" id="mazda3Pros">
+                            <!-- Populated by JavaScript -->
+                        </div>
+                    </div>
+                    <div class="cons-section">
+                        <h3>Mazda3 Considerations</h3>
+                        <div class="cons-list" id="mazda3Cons">
+                            <!-- Populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="car-pros-cons impreza-pros-cons">
+                    <div class="pros-section">
+                        <h3>Impreza Advantages</h3>
+                        <div class="pros-list" id="imprezaPros">
+                            <!-- Populated by JavaScript -->
+                        </div>
+                    </div>
+                    <div class="cons-section">
+                        <h3>Impreza Considerations</h3>
+                        <div class="cons-list" id="imprezaCons">
+                            <!-- Populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="car-pros-cons both-pros-cons">
+                    <div class="side-by-side-comparison">
+                        <div class="comparison-column mazda3-column">
+                            <h3>Mazda3</h3>
+                            <div class="pros-cons-split">
+                                <div class="pros-mini" id="mazda3ProsMini"></div>
+                                <div class="cons-mini" id="mazda3ConsMini"></div>
+                            </div>
+                        </div>
+                        <div class="comparison-column impreza-column">
+                            <h3>Impreza</h3>
+                            <div class="pros-cons-split">
+                                <div class="pros-mini" id="imprezaProsMini"></div>
+                                <div class="cons-mini" id="imprezaConsMini"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="importance-filter">
+                <h4>Filter by Importance</h4>
+                <div class="filter-options">
+                    <label class="filter-option">
+                        <input type="checkbox" value="performance" checked> Performance
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox" value="reliability" checked> Reliability
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox" value="cost" checked> Cost
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox" value="practicality" checked> Practicality
+                    </label>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Buyer Profiles -->
+    <section class="section buyer-profiles">
+        <div class="container">
+            <h2 class="section-title">Which Car is Right for You?</h2>
+            
+            <div class="decision-quiz">
+                <h3>Interactive Buyer's Guide</h3>
+                <div class="quiz-container">
+                    <div class="quiz-question active" data-question="1">
+                        <h4>What's your primary driving environment?</h4>
+                        <div class="quiz-options">
+                            <button class="quiz-option" data-value="urban">Urban/Highway</button>
+                            <button class="quiz-option" data-value="weather">Snow/Bad Weather</button>
+                            <button class="quiz-option" data-value="mixed">Mixed Conditions</button>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question" data-question="2">
+                        <h4>What matters most to you?</h4>
+                        <div class="quiz-options">
+                            <button class="quiz-option" data-value="driving">Driving Experience</button>
+                            <button class="quiz-option" data-value="space">Interior Space</button>
+                            <button class="quiz-option" data-value="cost">Lower Cost</button>
+                            <button class="quiz-option" data-value="reliability">Reliability</button>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question" data-question="3">
+                        <h4>Your budget priority?</h4>
+                        <div class="quiz-options">
+                            <button class="quiz-option" data-value="purchase">Lower Purchase Price</button>
+                            <button class="quiz-option" data-value="maintenance">Lower Maintenance</button>
+                            <button class="quiz-option" data-value="total">Total Cost of Ownership</button>
+                        </div>
+                    </div>
+
+                    <div class="quiz-result" id="quizResult">
+                        <!-- Result will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <div class="quiz-navigation">
+                    <button id="prevBtn" class="btn btn--secondary" disabled>Previous</button>
+                    <button id="nextBtn" class="btn btn--primary">Next</button>
+                </div>
+            </div>
+
+            <div class="buyer-profiles-grid">
+                <div class="profile-card mazda3-profile">
+                    <h4>Choose Mazda3 if you are:</h4>
+                    <ul id="mazda3Profiles">
+                        <!-- Populated by JavaScript -->
+                    </ul>
+                </div>
+                <div class="profile-card impreza-profile">
+                    <h4>Choose Impreza if you are:</h4>
+                    <ul id="imprezaProfiles">
+                        <!-- Populated by JavaScript -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Verdict -->
+    <section class="section verdict-section">
+        <div class="container">
+            <h2 class="section-title">Final Verdict</h2>
+            
+            <div class="verdict-scoring">
+                <h3>Overall Scoring with Custom Weights</h3>
+                <div class="weight-sliders">
+                    <div class="slider-group">
+                        <label for="performanceWeight">Performance: <span id="performanceValue">25%</span></label>
+                        <input type="range" id="performanceWeight" min="0" max="50" value="25">
+                    </div>
+                    <div class="slider-group">
+                        <label for="reliabilityWeight">Reliability: <span id="reliabilityValue">25%</span></label>
+                        <input type="range" id="reliabilityWeight" min="0" max="50" value="25">
+                    </div>
+                    <div class="slider-group">
+                        <label for="costWeight">Cost: <span id="costValue">25%</span></label>
+                        <input type="range" id="costWeight" min="0" max="50" value="25">
+                    </div>
+                    <div class="slider-group">
+                        <label for="practicalityWeight">Practicality: <span id="practicalityValue">25%</span></label>
+                        <input type="range" id="practicalityWeight" min="0" max="50" value="25">
+                    </div>
+                </div>
+
+                <div class="dynamic-scoring">
+                    <div class="score-display">
+                        <div class="car-score mazda3-final-score">
+                            <h4>Mazda3</h4>
+                            <div class="score-number" id="mazda3FinalScore">8.0</div>
+                            <div class="score-bar">
+                                <div class="score-fill" id="mazda3ScoreFill"></div>
+                            </div>
+                        </div>
+                        <div class="car-score impreza-final-score">
+                            <h4>Impreza</h4>
+                            <div class="score-number" id="imprezaFinalScore">7.4</div>
+                            <div class="score-bar">
+                                <div class="score-fill" id="imprezaScoreFill"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="recommendation-text">
+                        <p id="dynamicRecommendation">The Mazda3 manual transmission wins through superior driving engagement, better long-term reliability, and lower total cost of ownership.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="final-recommendations">
+                <div class="recommendation-card winner-card">
+                    <h3>🏆 Overall Winner: Mazda3 Manual</h3>
+                    <p>Superior driving dynamics, excellent reliability, and lower maintenance costs make it the enthusiast's choice.</p>
+                    <div class="key-advantages">
+                        <span class="advantage">6-Speed Manual</span>
+                        <span class="advantage">4.0★ Rating</span>
+                        <span class="advantage">$433/yr Maintenance</span>
+                        <span class="advantage">191 HP Available</span>
+                    </div>
+                </div>
+
+                <div class="recommendation-card runner-up-card">
+                    <h3>🥈 Strong Alternative: Impreza Manual</h3>
+                    <p>Standard AWD and more space make it ideal for all-weather driving and practical needs.</p>
+                    <div class="key-advantages">
+                        <span class="advantage">Standard AWD</span>
+                        <span class="advantage">100.9 cu ft Interior</span>
+                        <span class="advantage">Lower Purchase Price</span>
+                        <span class="advantage">2017-2020 Available</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Interactive Car Comparison Dashboard. Data compiled from automotive sources and reliability studies.</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
